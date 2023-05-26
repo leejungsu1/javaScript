@@ -37,12 +37,14 @@
     </div>
     <script>
       $("form").on("submit", function (e) {
-        if ($("#email").val() == "") {
+        let email = $("#email").val();
+        let pw = $("#pw").val();
+        if (email == "" || !/\S+@\S+\.\S+/.test(email)) {
           e.preventDefault();
-          alert("아이디를 입력하세요");
-        } else if ($("#pw").val() == "") {
+          alert("아이디를 확인해주세요");
+        } else if ($("#pw").val() == "" || !/[A-Z]/.test(pw)) {
           e.preventDefault();
-          alert("비밀번호를 입력하세요");
+          alert("비밀번호를 확인해주세요");
         }
       });
     </script>
@@ -50,11 +52,29 @@
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand">Navbar</span>
+        <span class="badge bg-dark ms-auto mx-3">Dark 🔄</span>
         <button class="navbar-toggler" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
     </nav>
+
+    <script>
+      var num = 0;
+      console.log(num, "ㄱ");
+      $(".badge").on("click", function () {
+        num++;
+        console.log(num, "ㄴ");
+        if (num % 2 === 0) {
+          //홀수면 font light
+          $(".badge").addClass("ft-dark");
+        } else {
+          //짝수면 font dark
+          console.log(num, "ㄷ");
+          $(".badge").removeClass("ft-dark");
+        }
+      });
+    </script>
 
     <ul class="list-group">
       <li class="list-group-item">An item</li>
@@ -100,6 +120,79 @@
       //       .getElementsByClassName("list-group")[0]
       //       .classList.toggle("show");
       //   });
+    </script>
+
+    <div class="alert alert-danger">5초 이내 구매시 사은품 증정</div>
+
+    <script>
+      let timer;
+      let count = 5;
+
+      timer = setInterval(function () {
+        console.log(count);
+        $(".alert").html(count + "초 이내 구매시 사은품 증정");
+        count--;
+        if (count < 0) {
+          $(".alert").hide();
+          clearInterval(timer);
+        }
+      }, 1000);
+    </script>
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="./ex/img/구라1.jpeg" />
+        </div>
+        <div class="slide-box">
+          <img src="./ex/img/구라2.jpeg" />
+        </div>
+        <div class="slide-box">
+          <img src="./ex/img/구라3.jpeg" />
+        </div>
+        <div class="slide-box">
+          <img src="./ex/img/구라4.jpeg" />
+        </div>
+      </div>
+    </div>
+    <button class="btn1">1</button>
+    <button class="btn2">2</button>
+    <button class="btn3">3</button>
+    <button class="before">이전</button>
+    <button class="next">다음</button>
+    <script>
+      let pic = 0;
+      $(".btn1").on("click", function () {
+        $(".slide-container").css("transform", "translateX(-0vw)");
+        pic = 0;
+      });
+      $(".btn2").on("click", function () {
+        $(".slide-container").css("transform", "translateX(-100vw)");
+        pic = 1;
+      });
+      $(".btn3").on("click", function () {
+        $(".slide-container").css("transform", "translateX(-200vw)");
+        pic = 2;
+      });
+
+      $(".before").on("click", function () {
+        console.log(pic);
+        if (pic > 0) {
+          pic -= 1;
+          $(".slide-container").css("transform", `translateX(-${pic}00vw)`);
+        } else {
+          pic = $("img").length - 1;
+          $(".slide-container").css("transform", `translateX(-${pic}00vw)`);
+        }
+      });
+      $(".next").on("click", function () {
+        if (pic < $("img").length - 1) {
+          pic += 1;
+          $(".slide-container").css("transform", `translateX(-${pic}00vw)`);
+        } else {
+          $(".slide-container").css("transform", `translateX(0vw)`);
+          pic = 0;
+        }
+      });
     </script>
 
     <script

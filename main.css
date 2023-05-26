@@ -58,3 +58,42 @@
   width: 100%;
   height: 100%;
 }
+
+.ft-dark {
+  color: black !important;
+}
+.label {
+  display: none !important;
+}
+.openLabel {
+  display: block !important;
+}
+
+.pic {
+  /* display: none !important; */
+  opacity: 0;
+  transition: all 1s;
+  overflow: hidden;
+  height: 0;
+}
+
+.picShow {
+  /* display: block !important; */
+  opacity: 1;
+  height: 1;
+  overflow: visible;
+}
+.slide-container {
+  width: 400vw;
+  height: 50vw;
+  transition: all 1s;
+}
+.slide-box {
+  width: 100vw;
+  height: 50vw;
+  float: left;
+}
+.slide-box img {
+  width: 100%;
+  height: 100%;
+}
