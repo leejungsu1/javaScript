@@ -235,20 +235,28 @@
       let over = false;
       let len = 0;
       let pic = 0;
+      let slide = $(".slide-box");
+      let container = $(".slide-container");
       $(".btn1").on("click", function () {
-        $(".slide-container").css("transform", "translateX(-0vw)");
+        // container.css("transform", "translateX(-0vw)");
         pic = 0;
         click = false;
+        transform(pic);
+        // console.log("q", $(this).index());
       });
       $(".btn2").on("click", function () {
-        $(".slide-container").css("transform", "translateX(-100vw)");
+        // container.css("transform", "translateX(-100vw)");
         pic = 1;
         click = false;
+        transform(pic);
+        // console.log("w", $(this).index());
       });
       $(".btn3").on("click", function () {
-        $(".slide-container").css("transform", "translateX(-200vw)");
+        // container.css("transform", "translateX(-200vw)");
         pic = 2;
         click = false;
+        transform(pic);
+        // console.log("e", $(this).index());
       });
       // var box = $(".slide-box").eq(0);
       // var hammer = new Hammer.Manager(box);
@@ -262,66 +270,127 @@
       // hammer.on("pan", function (e) {
       //   console.log(e.deltaX);
       // });
+      let index = 0;
+      slide.mousedown(function (e) {
+        start = e.clientX;
+        click = true;
+        // console.log("111", start);
+        // console.log(slide.length);
+        // index = $(this).index();
+        // console.log("container : ", index);
+        index = $(this).index();
+        slide.eq(`${index}`).mousemove(function (e) {
+          console.log("box : ", index);
+          let base = -870 * index;
 
-      $(".slide-box")
-        .eq(`${pic}`)
-        .on("mousedown", function (e) {
-          start = e.clientX;
-          click = true;
-          // console.log(start);
-        });
-
-      $(".slide-box")
-        .eq(`${pic}`)
-        .on("mousemove", function (e) {
-          let end = e.clientX;
-          len = end - start;
+          // console.log("this : ", $(this));
+          end = e.clientX;
+          len = end - start + base;
+          const length = end - start;
+          // console.log("length", length);
+          // console.log("len", len);
           if (click) {
-            // console.log(len);
-            $(".slide-container").css("transform", `translateX(${len}px)`);
-            $(".slide-container").css("transition", "all 0s");
+            if (index === 0 && len > 0) return;
+            if (index === slide.length - 1 && len <= base) return;
+            container.css("transform", `translateX(${len}px)`);
+            container.css("transition", "all 0s");
           }
+          slide.eq(`${pic}`).mouseup(function (e) {
+            click = false;
+            if (index === 0 && len > 0) return;
+            if (index === slide.length - 1 && len <= base) return;
+            if ((length < 0 && length > -150) || (length > 0 && length < 150)) {
+              //자기자신
+              // console.log("kkkkk", click);
+              // container.css("transform", `translateX(-${pic}00vw)`);
+              // container.css("transition", "all 1s");
+              transform(pic);
+            } else if (length > 0 && 150 <= length) {
+              //앞으로 넘기기
+              pic = index - 1;
+              // console.log("pic :", pic);
+              transform(pic);
+              // container.css("transform", `translateX(-${pic}00vw)`);
+              // container.css("transition", "all 1s");
+            } else if (length < 0 && length <= -150) {
+              //뒤로넘기기
+              pic = index + 1;
+              // console.log("pic :", pic);
+              transform(pic);
+              // container.css("transform", `translateX(-${pic}00vw)`);
+              // container.css("transition", "all 1s");
+            }
+          });
         });
-      $(".slide-box")
-        .eq(`${pic}`)
-        .on("mouseup", function (e) {
-          click = false;
-          if (len <= -200) {
-            pic++;
-            // console.log("hhhhh", click);
-            $(".slide-container").css("transform", `translateX(-${pic}00vw)`);
-            $(".slide-container").css("transition", "all 1s");
-          } else if (len > -200) {
-            // console.log("kkkkk", click);
-            $(".slide-container").css("transform", `translateX(-${pic}00vw)`);
-            $(".slide-container").css("transition", "all 1s");
-          }
-          // console.log("zzzz", click);
-        });
+      });
+      // $(".slide-box")
+      //   .eq(1)
+      //   .on("mousedown", function (e) {
+      //     start = e.clientX;
+      //     click = true;
+      //     console.log(start);
+      //   });
+
+      // $(".slide-box")
+      //   .eq(1)
+      //   .on("mousemove", function (e) {
+      //     let end = e.clientX;
+      //     len = end - start;
+      //     if (click) {
+      //       console.log(len);
+      //       $(".slide-container").css("transform", `translateX(${len}px)`);
+      //       $(".slide-container").css("transition", "all 0s");
+      //     }
+      //   });
+      // $(".slide-box")
+      //   .eq(1)
+      //   .on("mouseup", function (e) {
+      //     click = false;
+      //     if (len <= -200) {
+      //       pic++;
+      //       console.log("hhhhh", click);
+      //       $(".slide-container").css("transform", `translateX(-${pic}00vw)`);
+      //       $(".slide-container").css("transition", "all 1s");
+      //     } else if (len > -200) {
+      //       // console.log("kkkkk", click);
+      //       $(".slide-container").css("transform", `translateX(-${pic}00vw)`);
+      //       $(".slide-container").css("transition", "all 1s");
+      //     }
+      //     // console.log("zzzz", click);
+      //   });
 
       $(".before").on("click", function () {
         // console.log(pic);
         if (pic > 0) {
           pic -= 1;
           click = false;
-          $(".slide-container").css("transform", `translateX(-${pic}00vw)`);
+          // container.css("transform", `translateX(-${pic}00vw)`);
+          transform(pic);
         } else {
           pic = $("img").length - 1;
           click = false;
-          $(".slide-container").css("transform", `translateX(-${pic}00vw)`);
+          transform(pic);
+          // container.css("transform", `translateX(-${pic}00vw)`);
         }
       });
       $(".next").on("click", function () {
         if (pic < $("img").length - 1) {
           pic += 1;
           click = false;
-          $(".slide-container").css("transform", `translateX(-${pic}00vw)`);
+          transform(pic);
+          // container.css("transform", `translateX(-${pic}00vw)`);
         } else {
           click = false;
-          $(".slide-container").css("transform", `translateX(0vw)`);
+          // container.css("transform", `translateX(0vw)`);
           pic = 0;
+          transform(pic);
         }
       });
+
+      function transform(num) {
+        container.css("transform", `translateX(-${num}00vw)`);
+        container.css("transition", "all 1s");
+      }
     </script>
 
     <script
