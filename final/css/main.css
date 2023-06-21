@@ -1,0 +1,97 @@
+.navbar-brand {
+  font-size: 25px !important;
+  color: white !important;
+}
+.nav-link {
+  color: white !important;
+  padding: 8px !important;
+  font-size: 18px !important;
+}
+.navbar {
+  background-color: #212529;
+}
+.main {
+  padding-top: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 30px;
+  background-color: #f4f4f4;
+}
+.row {
+  padding-top: 20px;
+}
+.cartList {
+  padding-top: 25px;
+  background-color: #f4f4f4;
+}
+.cart {
+  padding: 25px;
+  padding-top: 30px;
+  background-color: #e2e2e2;
+}
+.drag {
+  text-align: center;
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 155px;
+  margin-top: 5px;
+}
+.disable {
+  display: none;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+.card {
+  border-radius: 0% !important;
+  border: none !important;
+}
+.brand {
+  color: darkgray;
+}
+.card-title {
+  font-weight: bold;
+  color: black;
+}
+.card-text {
+  color: black;
+  font-size: medium;
+}
+.card-img-top {
+  padding: 20px;
+}
+.addBtn {
+  background-color: black;
+  border-radius: 10%;
+  border: none;
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 13px;
+}
+.searchNone {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  font-weight: bold;
+  padding-left: 42vw !important;
+  padding-top: 10px;
+}
+.highlight {
+  background-color: yellow;
+}
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
